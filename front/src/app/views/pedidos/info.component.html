@@ -1,0 +1,419 @@
+
+
+<div bsModal #largeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Transferencia</h4>
+        <button type="button" class="close" (click)="largeModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-transferencia [producto]="aTransferir" *ngIf="showTransferencia"></app-transferencia>
+        <div style="text-align:right">
+        	<button type="button" class="btn btn-secondary" (click)="largeModal.hide()">Cerrar</button>
+        </div>
+        
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="largeModal.hide()">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div bsModal #largeModal2="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Picking</h4>
+        <button type="button" class="close" (click)="largeModal2.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-picking [producto]="aPicking" [informacion]="informacion" *ngIf="showPicking"></app-picking>
+        <div style="text-align:right">
+        	<button type="button" class="btn btn-secondary" (click)="largeModal2.hide()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="prin" [hidden]="true">
+	<div class="row">
+	<div class="col-lg-12">
+      	<div class="row">
+      		<div class="col-lg-12">
+      			<div class="">
+      				<div class="row">
+      					<div class="col-sm-3">
+      						<img src="http://www.tecprecincsrl.com.ar/e/wp-content/uploads/2018/02/logo.png" style="width: 210px; position: absolute;">
+	      				</div>
+	      			</div>
+	      			<div class="row">
+	      				<div class="col-sm-5">
+      						
+	      				</div>
+	      				<div class="col-sm-6" style="border:2px solid; text-align:center">
+	      					<h4>SOLICITUD DE COMPRAS</h4>
+	      				</div>
+	      				<div class="col-sm-1">
+	      				</div>
+      				</div>
+      				<br><br><br>
+      				<div class="row" style="border:2px solid;">
+      					<div class="row col-lg-12">
+      						<div class="col-sm-4">
+      							<strong >Solicitud: </strong>{{informacion.id}}
+      						</div>
+      						<div class="col-sm-4">
+      							
+      						</div>
+      						<div class="col-sm-4">
+      							<strong>Fecha de alta: </strong>{{informacion.created_at | date :  "dd-MM-yyyy"}}
+      						</div>	
+      					</div>
+      					<br><br>
+      					<div class="row col-lg-12">
+	      					<div class="col-sm-4">
+	      						<strong>Solicitante: </strong>{{informacion.usuario.nombre}}
+		      				</div>
+		      				<div class="col-sm-4">
+		      					<strong>Departamento: </strong>{{informacion.usuario.departamento.nombre}}
+		      				</div>
+		      				<div class="col-sm-4">
+		      					
+		      				</div>
+	      				</div>
+      				</div>
+      			</div>
+      		</div>	
+      	</div>
+      	<br>
+      	<div class="row" >
+      		<div class="col-lg-12">
+      			<div class="">
+      				<div class="row">
+      					<table class="table table-bordered table-striped table-sm" style="border:2px solid #000000 !important;font-size: 12px">
+				            <thead>
+				              <tr>
+				              	<th>Código</th>
+				                <th>Cantidad</th>
+				                <th>Nombre</th>
+				              </tr>
+				            </thead>
+				            <tbody>
+				              <tr *ngFor="let item of informacion.solicitud">
+				              	<td>{{item.codigo}}</td>
+				                <td>{{item.pivot.cantidad}}</td>
+				                <td>{{item.nombre}}</td>
+				              </tr>
+				            </tbody>
+				          </table>
+      				</div>
+      				
+      			</div>
+      		</div>	
+      	</div>
+      	<div class="row" >
+      		<div class="col-lg-12">
+      			<div class="row" style="border:2px solid;">
+  					<div class="row col-lg-12">
+  						<div class="col-sm-4">
+  							<strong >OBSERVACIONES: </strong>
+  							<br><br><br><br>
+  						</div>
+  						<div class="col-sm-4">
+  							
+  						</div>
+  						<div class="col-sm-4">
+  							<strong>Fecha de alta: </strong>{{informacion.created_at | date :  "dd-MM-yyyy"}}
+  						</div>	
+  					</div>
+  					<div class="row col-lg-12" style="border-top:2px solid; border-bottom:2px solid; margin-left: 0.05%;">
+      					<div class="col-sm-5">
+      						<p style="font-weight: bold; font-size: smaller; margin: 5px;">Fecha de recepción de la solicitud:</p> 
+	      				</div>
+	      				<div class="col-sm-4">
+	      					<p style="font-weight: bold; font-size: smaller; margin: 5px;">Responsable de la compra:</p> 
+	      				</div>
+	      				<div class="col-sm-3">
+	      					<p style="font-weight: bold; font-size: smaller; margin: 5px;">Firma:</p>
+	      				</div>
+      				</div>
+      				<div class="row col-lg-12">
+      					<div class="col-sm-6">
+      						<strong>OBSERVACIÓN DE LA RECEPCIÓN: </strong>
+      						<br><br><br><br><br>
+	      				</div>
+	      				<div class="col-sm-2">
+	      				</div>
+	      				<div class="col-sm-4">
+	      				</div>
+      				</div>
+  				</div>
+      		</div>
+      	</div>
+    </div>	
+</div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+      	<div class="row">
+      		<div class="col-lg-12">
+      			<div class="">
+      				<div class="row">
+      					<div class="col-lg-4">
+	      					<strong>Nº Solicitud: </strong>{{informacion.id}}
+	      				</div>
+      				</div>
+      				<br>
+      				<div class="row">
+      					<div class="col-lg-4">
+	      					<strong>Departamento: </strong>{{informacion.usuario.departamento.nombre}}
+	      				</div>
+	      				<div class="col-lg-4">
+	      					<strong>Usuario: </strong>{{informacion.usuario.nombre}}
+	      				</div>
+	      				<div class="col-lg-4">
+	      					<strong>Fecha de alta: </strong>{{informacion.created_at | date :  "dd-MM-yyyy"}}
+	      				</div>
+      				</div>
+      			</div>
+      		</div>	
+      	</div>
+      	<br>
+      	<div class="row">
+      		<div class="col-lg-12">
+      			<div class="">
+      				<div class="row">
+      					<table class="table table-bordered table-striped table-sm">
+				            <thead>
+				              <tr>
+				              	<th>Código</th>
+				                <th>Cantidad</th>
+				                <th>Nombre</th>
+				                <th *ngIf="informacion.estado!=0">Estatus</th>
+				                <th *ngIf="informacion.estado==1">Acción</th>
+				              </tr>
+				            </thead>
+				            <tbody>
+				              <tr *ngFor="let item of informacion.solicitud">
+				              	<td>{{item.codigo}}</td>
+				                <td>{{item.pivot.cantidad}}</td>
+				                <td>{{item.nombre}}</td>
+				                <td *ngIf="informacion.estado!=0">
+				                  <span [ngClass]="['badge', 'badge-success']" *ngIf="item.pivot.aprobado">Aprobado</span>
+				                  <span [ngClass]="['badge', 'badge-success']" *ngIf="item.pivot.entregado">Entregado</span>
+				                  <span [ngClass]="['badge', ' badge-danger']" *ngIf="item.pivot.cancelado">Cancelado</span>
+				                  <span [ngClass]="['badge', ' badge-secondary']" *ngIf="item.pivot.devuelto">Devuelto</span>
+				                  <span [ngClass]="['', ' badge-warning']" *ngIf="!item.pivot.aprobado && !item.pivot.entregado && !item.pivot.cancelado && !item.pivot.devuelto">Pendiente</span>
+				                </td>
+				                <td *ngIf="informacion.estado==1">
+				                	
+				                	<div *ngIf="informacion.estado==1">
+					                	<div *ngIf="item.pivot.aprobado">
+					                		<button type="button" class="btn btn-outline-secondary btn-sm" (click)=devolver(item)>Devolver</button>
+					                	</div>
+					                	<div *ngIf="item.pivot.entregado">
+					                		<button type="button" class="btn btn-outline-secondary btn-sm" (click)=devolver(item)>Devolver</button>
+					                	</div>
+					                	<div *ngIf="item.pivot.cancelado">
+					                		
+					                	</div>
+					                	<div *ngIf="item.pivot.devuelto">
+					                		
+					                	</div>
+					                	<div *ngIf="!item.pivot.aprobado && !item.pivot.entregado && !item.pivot.cancelado && !item.pivot.devuelto">
+						                	<div >
+						                		<!-- <button type="button" class="btn btn-outline-success btn-sm" (click)="selectPicking(item);largeModal2.show()">Picking</button> -->
+							                	<button type="button" class="btn btn-outline-primary btn-sm" >Entregado</button>
+							                	
+							                	<button type="button" class="btn btn-outline-danger btn-sm" (click)=cancelar(item)>Cancelar</button>
+						                	</div>
+						                	
+					                	</div>
+					                	
+					               	</div>
+				                </td>
+				              </tr>
+				            </tbody>
+				          </table>
+				          <div class="row">
+				          	<div class="col-lg-12">
+				          		<div class="form-group">
+								  <label for="comment">Observaciones:</label>
+								  <textarea class="form-control" rows="5" cols="150"></textarea>
+								</div>
+					        </div>
+				          </div>
+      				</div>
+      			</div>
+      		</div>	
+      	</div>
+    </div>	
+</div>
+
+<!-- <div style="text-align:right">
+	<button type="button" class="btn btn-outline-secondary btn-sm" (click)=print()><i class="fa fa-print">Imprimir Solicitud</i></button>
+</div>
+<div style="text-align:right" *ngIf="informacion.estado!=0">
+	<button type="button" class="btn btn-outline-secondary btn-sm" (click)=print2()><i class="fa fa-print">Imprimir Remito</i></button>
+</div> -->
+
+<div id="prin2" [hidden]="true">
+	<div class="row">
+		<div class="col-lg-12">
+	      	<div class="row">
+	      		<div class="col-lg-12">
+	      			<div class="">
+	      				<div class="row">
+	      					<div class="col-sm-3">
+	      						<img src="http://www.tecprecincsrl.com.ar/e/wp-content/uploads/2018/02/logo.png" style="width: 210px; position: absolute;">
+		      				</div>
+		      			</div>
+		      			<div class="row">
+		      				<div class="col-sm-5">
+	      						
+		      				</div>
+		      				<div class="col-sm-6" style="border:2px solid; text-align:center">
+		      					<h4>REMITO {{informacion.id}} </h4>
+		      				</div>
+		      				<div class="col-sm-1">
+
+		      				</div>
+	      				</div>
+	      				
+	      				<div class="row">
+		      				<div class="col-sm-5">
+	      						
+		      				</div>
+		      				<div class="col-sm-6" style="text-align: center">
+		      					<strong>Fecha de alta: </strong>{{informacion.created_at | date :  "dd-MM-yyyy"}}
+		      				</div>
+		      				<div class="col-sm-1">
+		      				</div>
+	      				</div>
+	      				<br><br>
+	      				<div class="row" >
+	      					<div class="row col-lg-12" style="font-size: 12px">
+	      						<div class="col-sm-4" style="border:2px solid;">
+	      							Numero de requirmiento: {{informacion.id}}
+	      						</div>
+	      						<div class="col-sm-2" style="border:2px solid;">
+	      							5555
+	      						</div>
+	      						<div class="col-sm-4" style="border:2px solid;">
+	      							<strong>Fecha de alta: </strong>{{informacion.created_at | date :  "dd-MM-yyyy"}}
+	      						</div>	
+	      					</div>
+	      				</div>
+	      				<div class="row"  style="border:2px solid;">
+	      					<div class="row col-lg-12" >
+		      					<div class="col-sm-7">
+		      						<strong>Solicitante: </strong>{{informacion.usuario.nombre}}
+			      				</div>
+			      				<div class="col-sm-3">
+			      					
+			      				</div>
+			      				<div class="col-sm-2">
+			      					
+			      				</div>
+		      				</div>
+	      				</div>
+	      				<div class="row"  style="border:2px solid;">
+	      					<div class="row col-lg-12" >
+		      					<div class="col-sm-7">
+		      						Domicilio: 
+			      				</div>
+			      				<div class="col-sm-3">
+			      					
+			      				</div>
+			      				<div class="col-sm-2">
+			      					
+			      				</div>
+		      				</div>
+		      				<div class="row col-lg-12" >
+		      					<div class="col-sm-7">
+		      						Zona: 
+			      				</div>
+			      				<div class="col-sm-3">
+			      					Centro:
+			      				</div>
+			      				<div class="col-sm-2">
+			      					Teléfono:
+			      				</div>
+		      				</div>
+	      				</div>
+	      			</div>
+	      		</div>	
+	      	</div>
+	      	<div class="row" >
+	      		<div class="col-lg-12">
+	      			<div class="">
+	      				<div class="row">
+	      					<table class="table table-bordered table-striped table-sm" style="border:2px solid #000000 !important; font-size: 12px">
+					            <thead>
+					              <tr>
+					              	<th>Código</th>
+					                <th>Cantidad</th>
+					                <th>Nombre</th>
+					              </tr>
+					            </thead>
+					            <tbody>
+					              <tr *ngFor="let item of informacion.solicitud">
+					              	<td>{{item.codigo}}</td>
+					                <td>{{item.pivot.cantidad}}</td>
+					                <td>{{item.nombre}}</td>
+					              </tr>
+					            </tbody>
+					          </table>
+	      				</div>
+	      				
+	      			</div>
+	      		</div>	
+	      	</div>
+	      	
+	      	<div class="row col-lg-12" style=" margin-left: 0.05%;">
+	      		<div class="col-sm-1">
+	      		</div>
+				<div class="col-sm-4" >
+					<p style="font-size: 12px;">ENTREGÓ</p>
+					<div style="border: 1px solid">
+						<p style="font-weight: bold; margin: 5px;  text-align: left;margin-top: 25px;font-size: 12px;">Fecha:
+						</p>
+						<p style="font-weight: bold; margin: 5px;  text-align: left;margin-top: 25px;font-size: 12px;">Firma:
+						</p>
+						<p style="font-weight: bold; margin: 5px; text-align: left; margin-bottom: 25px;font-size: 12px;">Aclaración:
+						</p>
+						<br><br><br><br><br>
+					</div>
+						  
+  				</div>
+  				<div class="col-sm-2">
+	      		</div>
+  				<div class="col-sm-4">
+  					<p style="text-align:center;font-size: 12px;">RECIBÍ CONFORME </p>
+  					<div style="border: 1px solid">
+  						<p style="font-weight: bold; margin: 5px;  text-align: left;margin-top: 25px;font-size: 12px;">Fecha:
+  						</p>
+  						<p style="font-weight: bold; margin: 5px; text-align: left;margin-top: 25px;font-size: 12px;">Firma:
+  						</p>
+  						<p style="font-weight: bold; margin: 5px; text-align: left; margin-bottom: 25px;font-size: 12px;">Aclaración:
+  						</p>
+  						<p style="font-weight: bold; margin: 5px; text-align: left; margin-bottom: 25px;font-size: 12px;">Sello de la dependencia:
+  						</p>
+  						<br><br><br> 
+  					</div>
+  					
+  				</div>
+  				<div class="col-sm-1">
+	      		</div>
+			</div>
+	    </div>	
+	</div>
+</div>

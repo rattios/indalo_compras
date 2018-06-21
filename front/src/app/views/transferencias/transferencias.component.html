@@ -1,0 +1,262 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="col-lg-12">
+        <img src="../assets/img/template.gif" style="position: absolute;left: 0;right: 0;top: 0;bottom: 0;margin: auto;z-index: 99;width: 135px;margin-top: 15%;" *ngIf="loading">
+        <div style="width: 100%">
+          <alert type="success" *ngIf="success" style="position: fixed;width: calc(100% - 262px);z-index: 99;top: 65px;text-align: center;">
+            <strong>Actualizado con éxito</strong> 
+          </alert>
+          <alert type="danger" *ngIf="fail" style="position: fixed;width: calc(100% - 262px);z-index: 99;top: 65px;text-align: center;">
+            <strong>Ha ocurrido un Error!</strong> 
+          </alert>
+        </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card" *ngIf="!loading">
+            <div class="card-header">
+              <i class="fa fa-align-justify"></i>  <label class="labels" style="font-size: 18px; font-weight: bold">Busca el producto a transferir </label>
+            </div>
+            <div class="card-body">
+              <div class="form-group form-black label-floating is-empty">
+                   <label class="labels" style="font-size: 16px; font-weight: bold">Buscar: </label>
+                  <input  class="form-control" type="text"  id="inputName" [(ngModel)]="inputName" (ngModelChange)="FilterByName()"/>
+                   <br>
+              </div>
+              <table class="table table-striped">
+                <thead>
+                  <th>Principal</th>
+                  <th>Secundario</th>
+                  <th>Producto</th>
+                  
+                  <th>Código</th>
+                  <th>Hacer una transferencia entre almacenes</th>
+                  <th>Devolver producto a un almacén</th>
+                  <th>Enviar bien de uso a un departamento</th>
+                </thead>
+                <tbody>
+                   <tr *ngFor="let item of items">
+                      
+                      <td>{{item.stock}}</td>
+                      <td>{{item.stock2}}</td>
+                      <td>{{item.nombre}}</td>
+                      <td>{{item.codigo}}</td>
+                      <td><button type="button" class="btn btn-primary" (click)="largeModal.show(); setProductos(item)">Transferir</button></td>
+                      <td><button type="button" class="btn btn-secondary" (click)="largeModal2.show(); setProductos(item);setDepartamentos(item);bienUso(item)" *ngIf="item.tipo_id==2">Devolver</button> </td>
+                      <td><button type="button" class="btn btn-success" (click)="largeModal3.show(); setProductos(item);bienUso(item)" *ngIf="item.tipo_id==2">Enviar</button> </td>
+                   </tr>
+                </tbody>
+              </table>
+                <div class="btn-toolbar" role="toolbar" style="margin: 0;">
+                  <div class="btn-group">
+                     <label style="margin-top:10px">Página {{currentIndex}}/{{pageNumber}} </label>
+                  </div>
+                  <div class="btn-group pull-right">
+                     <ul class="pagination" >
+                        <li [ngClass]="{'disabled': (currentIndex == 1 || pageNumber == 0)}" ><a  (click)="prevPage()">Atrás</a></li>
+                           <li *ngFor="let page of pagesIndex"  [ngClass]="{'active': (currentIndex == page)}">
+                              <a (click)="setPage(page)" >{{page}} </a>
+                           </li>
+                        <li [ngClass]="{'disabled': (currentIndex == pageNumber || pageNumber == 0)}" ><a   (click)="nextPage()">Siguiente</a></li>
+                     </ul>
+                  </div>
+                </div>
+            </div>   
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div bsModal #largeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" *ngIf="seTransfirio">
+      <div class="modal-header">
+        <h4 class="modal-title">Selecciona el departamento a transferir</h4>
+        <button type="button" class="close" (click)="largeModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+                <strong>Cantidad:</strong>
+                <input type="text" class="form-control" style="width: 50px" id="cantidad" placeholder="" [(ngModel)]="cantidad" (change)="checkCantidad(cantidad)">
+              </div>
+            </div>
+          </div>
+        <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <strong>Producto a transferir:</strong>
+                <p>{{producto.nombre}}</p>
+            </div>
+          </div>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <th>Departamento</th>
+            <th></th>
+          </thead>
+          <tbody>
+             <tr>
+                <td>Stock Principal</td>
+                <td style="text-align: right;"><button type="button" class="btn btn-success" (click)="transferir(101)">Transferir</button></td>
+             </tr>
+             <tr>
+                <td>Stock Secundario</td>
+                <td style="text-align: right;"><button type="button" class="btn btn-success" (click)="transferir(100)">Transferir</button></td>
+             </tr>
+             
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="largeModal.hide()">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+    <div class="modal-content" *ngIf="!seTransfirio" style="text-align: center">
+      <h2>¡Se transfirió con éxito!</h2>
+    </div>
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div bsModal #largeModal2="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" *ngIf="seTransfirio">
+      <div class="modal-header">
+        <h4 class="modal-title">Selecciona el departamento a transferir</h4>
+        <button type="button" class="close" (click)="largeModal2.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+                <strong>Cantidad:</strong>
+                <input type="text" class="form-control" style="width: 50px" id="cantidad" placeholder="" [(ngModel)]="cantidad" >
+              </div>
+            </div>
+          </div>
+        <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <strong>Producto a transferir:</strong>
+                <p>{{producto.nombre}}</p>
+            </div>
+          </div>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <th>En Stock</th>
+            <th>Departamento</th>
+            <th>Usuario</th>
+            <th>Transferir a</th>
+            <th>Transferir a</th>
+          </thead>
+          <tbody>
+             <tr *ngFor="let item of departamentos">
+                <td>{{item.stock}}</td>
+                <td>{{item.departamento.nombre}}</td>
+                <td>{{item.usuario.nombre}} - {{item.usuario.nombreRol}}</td>
+                <td style="text-align: right;"><button type="button" class="btn btn-primary" (click)="devolver(item.departamento_id,1,item.usuario.id)">Almacen principal</button></td>
+                <td style="text-align: right;"><button type="button" class="btn btn-secundary" (click)="devolver(item.departamento_id,2,item.usuario.id)">Almacen secundario</button></td>
+             </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="largeModal2.hide()">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+    <div class="modal-content" *ngIf="!seTransfirio" style="text-align: center">
+      <h2>¡Se transfirió con éxito!</h2>
+    </div>
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div bsModal #largeModal3="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" *ngIf="seTransfirio">
+      <div class="modal-header">
+        <h4 class="modal-title">Selecciona el departamento a transferir</h4>
+        <button type="button" class="close" (click)="largeModal3.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+                <strong>Cantidad:</strong>
+                <input type="text" class="form-control" style="width: 50px" id="cantidad" placeholder="" [(ngModel)]="cantidad" (change)="checkCantidad(cantidad)">
+              </div>
+            </div>
+          </div>
+        <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <strong>Producto a transferir:</strong>
+                <p>{{producto.nombre}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="!selecAlmacen">
+          <div class="col-sm-12">
+            
+            <table class="table table-striped">
+              <thead>
+                <th>Departamento</th>
+                <th></th>
+              </thead>
+              <tbody>
+                 <tr *ngFor="let item of departamentosRespaldo">
+                    <td>{{item.nombre}}</td>
+                    
+                    <td style="text-align: right;"><button type="button" class="btn btn-success" (click)="seleccionar(item.id)">Seleccionar</button></td>
+                 </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row" *ngIf="selecAlmacen">
+          <div class="col-sm-12">
+            <div style="text-align: right;">
+               <button type="button" class="btn btn-primary" (click)="unSelecAlmacen()">Volver</button>
+            </div>
+            <br>
+            <strong>Selecciona a quien se le va asignar el producto:</strong>
+            <select id="empleados" name="empleados" class="form-control" [(ngModel)]="empleado_id">
+              <option *ngFor="let cc of empleados" [value]="cc.id">{{cc.nombre}} {{cc.apellido}} - {{cc.nombreRol}}</option>
+            </select><br>
+            <table class="table table-striped">
+              <thead>
+                <th>Descontar de:</th>
+                <th></th>
+              </thead>
+              <tbody>
+                 <tr>
+                    <td>Almacén Principal</td>
+                    <td style="text-align: right;"><button type="button" class="btn btn-success" (click)="enviar(1)">Transferir</button></td>
+                 </tr>
+                 <tr>
+                    <td>Almacén Secundario</td>
+                    <td style="text-align: right;"><button type="button" class="btn btn-success" (click)="enviar(2)">Transferir</button></td>
+                 </tr>
+                 
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="largeModal3.hide()">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+    <div class="modal-content" *ngIf="!seTransfirio" style="text-align: center">
+      <h2>¡Se transfirió con éxito!</h2>
+    </div>
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

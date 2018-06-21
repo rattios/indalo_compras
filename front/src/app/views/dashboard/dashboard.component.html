@@ -1,0 +1,111 @@
+<div class="animated fadeIn" >
+  <img src="../assets/img/template.gif" style="position: absolute;left: 0;right: 0;top: 0;bottom: 0;margin: auto;z-index: 99;width: 135px;margin-left: 50%;" *ngIf="loading">
+  <div *ngIf="!loading">
+    
+    <div class="row">
+      
+      <div class="col-6 col-lg-4">
+        <div class="tp-wrapper" style="width: 100%">
+          <div class="tp-box" [@flipState]="flip" style="width: 100%">
+            <div class="tp-box__side tp-box__front">
+              <div class="card" style="border-radius: 20px" (click)="toggleFlip()">
+                <div class="h5 mb-0" style="text-align: center; text-align: center;/* margin-top: 5%; */background-color: #00796a;border-top-left-radius: 10px;border-top-right-radius: 10px;color: white; padding-bottom: 7%; padding-top: 7%;">Módulos Administrativos <br></div>
+                <div class="card-body">
+                  <div class="chart-wrapper">
+                    <img src="../../../assets/img/dashboard/1.png" alt="" style="width: 100%">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tp-box__side tp-box__back">
+              <div class="card" style="border-radius: 20px">
+                <div class="h5 mb-0" style="text-align: center; text-align: center;/* margin-top: 5%; */background-color: #00796a;border-top-left-radius: 10px;border-top-right-radius: 10px;color: white; padding-bottom: 7%; padding-top: 7%;" (click)="toggleFlip()">Módulos Administrativos <br></div>
+                <div class="card-body">
+                  <div class="chart-wrapper">
+                    <div style="text-align: left; color:black;">
+                      <img src="../../../assets/img/dashboard/4.png" alt="" style="width: 30%" [routerLink]="['/pedidos/aprobar']">Nómina<button type="button" class="btn btn-primary ir" style="border-radius: 10px">IR</button><hr>
+                    </div>
+                    <div style="text-align: left; color:black;" ><img src="../../../assets/img/dashboard/6.png" alt="" style="width: 30%">Vehículos<button type="button" class="btn btn-primary ir" style="border-radius: 10px">IR</button><hr></div>
+                    <div style="text-align: left; color:black;"><img src="../../../assets/img/dashboard/5.png" alt="" style="width: 30%">Clientes<button type="button" class="btn btn-primary ir" style="border-radius: 10px">IR</button></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-4">
+        <div class="tp-wrapper" style="width: 100%">
+          <div class="tp-box" [@flipState]="flip2" style="width: 100%">
+            <div class="tp-box__side tp-box__front">
+              <div class="card" style="border-radius: 20px" (click)="toggleFlip2()">
+                <div class="h5 mb-0" style="text-align: center; text-align: center;/* margin-top: 5%; */background-color: #43a047;border-top-left-radius: 10px;border-top-right-radius: 10px;color: white; padding-bottom: 7%; padding-top: 7%;">Módulos Comerciales y reportes <br></div>
+                <div class="card-body">
+                  <div class="chart-wrapper">
+                    <img src="../../../assets/img/dashboard/2.png" alt="" style="width: 100%">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tp-box__side tp-box__back">
+              <div class="card" style="border-radius: 20px">
+                <div class="h5 mb-0" style="text-align: center; font-size: 19px;/* margin-top: 5%; */background-color: #43a047;border-top-left-radius: 10px;border-top-right-radius: 10px;color: white; padding-bottom: 7%; padding-top: 7%;" (click)="toggleFlip2()">Módulos Comerciales y reportes <br></div>
+                <div class="card-body">
+                  <div class="chart-wrapper">
+                    <div style="text-align: left; color:black; font-size: 19px">
+                      <img src="../../../assets/img/dashboard/servicios.png" alt="" style="width: 30%; ">Tareas y servicios <button type="button" class="btn btn-primary ir" style="border-radius: 10px">IR</button><hr>
+                    </div><div style="text-align: left; color:black;">
+                      <img src="../../../assets/img/dashboard/taller.png" alt="" style="width: 30%">Taller <button type="button" class="btn btn-primary ir" style="border-radius: 10px">IR</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-4">
+        <div class="tp-wrapper" style="width: 100%">
+          <div class="tp-box" [@flipState]="flip3" style="width: 100%">
+            <div class="tp-box__side tp-box__front">
+              <div class="card" style="border-radius: 20px" (click)="toggleFlip3()">
+                <div class="h5 mb-0" style="text-align: center; text-align: center;/* margin-top: 5%; */background-color: #f9a825;border-top-left-radius: 10px;border-top-right-radius: 10px;color: white; padding-bottom: 7%; padding-top: 7%;">Módulo de Recursos <br></div>
+                <div class="card-body">
+                  <div class="chart-wrapper">
+                    <img src="../../../assets/img/dashboard/3.png" alt="" style="width: 100%">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tp-box__side tp-box__back">
+              <div class="card" style="border-radius: 20px">
+                <div class="h5 mb-0" style="text-align: center; text-align: center;/* margin-top: 5%; */background-color: #f9a825;border-top-left-radius: 10px;border-top-right-radius: 10px;color: white; padding-bottom: 7%; padding-top: 7%;" (click)="toggleFlip3()">Módulo de Recursos <br></div>
+                <div class="card-body">
+                  <div class="chart-wrapper">
+                    <div style="text-align: left; color:black;">
+                      <img src="../../../assets/img/dashboard/producto.png" alt="" style="width: 30%">Proveedores <button type="button" class="btn btn-primary ir" style="border-radius: 10px" [routerLink]="['/proveedores']">IR</button><hr>
+                    </div>
+                    <div style="text-align: left; color:black;">
+                      <img src="../../../assets/img/dashboard/compras.png" alt="" style="width: 30%">Compras <button type="button" class="btn btn-primary ir" style="border-radius: 10px" [routerLink]="['/pedidos/pedido']">IR</button><hr>
+                    </div>
+                    <div style="text-align: left; color:black;">
+                      <img src="../../../assets/img/dashboard/inventario.png" alt="" style="width: 30%">Inventario <button type="button" class="btn btn-primary ir" style="border-radius: 10px" [routerLink]="['/productos/stock']">IR</button><hr>
+                    </div>
+                    <div style="text-align: left; color:black; font-size: 19px;">
+                      <img src="../../../assets/img/dashboard/roles.png" alt="" style="width: 30%">Gestion de usuarios <button type="button" class="btn btn-primary ir" style="border-radius: 10px" [routerLink]="['/usuarios']">IR</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+</div>
